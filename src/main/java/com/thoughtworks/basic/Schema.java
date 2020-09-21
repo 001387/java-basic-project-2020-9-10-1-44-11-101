@@ -1,18 +1,33 @@
 package com.thoughtworks.basic;
 
-import java.util.Set;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Schema {
-    private Set<FlagSchema> flagsSchema;
+    Map<String, String> schemas;
 
-    public Schema(Set<FlagSchema> flagSchemas) {
-        this.flagsSchema = flagSchemas;
+    public Schema(String schemaConf) {
+        schemas = new HashMap<>();
+        Arrays.asList(schemaConf.split(","))
+                .stream()
+                .forEach(flag->{
+                    String[] nameValue = flag.split(":");
+                    schemas.put(nameValue[0], nameValue[1]);
+                });
     }
 
-    public Object getTypeOf(String flag) {
-        return flagsSchema.stream().filter(flagSchema -> flagSchema.equalsWith(flag))
-                .findFirst()
-                .get()
-                .getType();
+    public Object getValue(String name, String strValue) {
+        String type = schemas.get(name);
+        switch (type){
+            case "bool":
+                return "true".equalsIgnoreCase(strValue);
+            case "int":
+                return Integer.parseInt(strValue);
+            case "string":
+                return strValue;
+            default:
+                return  true;
+        }
     }
 }

@@ -24,5 +24,11 @@ public class CommandTest {
         Assert.assertEquals(command.getValue("d"),"/use/log");
     }
 
-   
+    @Test
+    public void should_return_right_command_when_given_command_negative(){
+        Command command = new Command("-l -p -9 -d /use/log");
+        Assert.assertNull(command.getValue("l"));
+        Assert.assertEquals(command.getValue("p"),"-9");
+        Assert.assertNotNull(command.getValue("d"),"/use/log");
+    }
 }
