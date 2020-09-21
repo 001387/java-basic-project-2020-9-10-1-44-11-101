@@ -17,5 +17,12 @@ public class CommandTest {
         Assert.assertEquals(command.getValue("d"), "/use/log");
     }
 
+    @Test
+    public void should_return_right_command_when_given_command_with_no_value() {
+        Command command = new Command("-l -d /use/log");
+        Assert.assertNull(command.getValue("l"));
+        Assert.assertEquals(command.getValue("d"),"/use/log");
+    }
+
    
 }
