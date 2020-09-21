@@ -15,6 +15,11 @@ public class SchemaTest {
         Assert.assertEquals(schema.getValue("l",null),Boolean.FALSE);
     }
 
+    @Test
+    public void should_return_int_1_when_given_l_int_1() {
+        Schema schema = new Schema("l:int");
+        Assert.assertEquals(schema.getValue("l","1"),new Integer("1"));
+    }
 
 
 }
