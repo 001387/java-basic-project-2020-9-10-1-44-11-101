@@ -21,5 +21,10 @@ public class SchemaTest {
         Assert.assertEquals(schema.getValue("l","1"),new Integer("1"));
     }
 
+    @Test
+    public void should_return_int_1_when_given_l_String_hello() {
+        Schema schema = new Schema("l:string");
+        Assert.assertEquals(schema.getValue("l","hello"),"hello");
+    }
 
 }
